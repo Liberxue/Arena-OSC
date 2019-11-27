@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html >
+<head>
+<meta charset="UTF-8">
+<title>Arena控制demo</title>
+
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main>
+	<form class="form">
+		<div class="form__cover"></div>
+		<div class="form__loader">
+			<div class="spinner active">
+				<svg class="spinner__circular" viewBox="25 25 50 50">
+					<circle class="spinner__path" cx="50" cy="50" r="20" fill="none" stroke-width="4" stroke-miterlimit="10"></circle>
+				</svg>
+			</div>
+		</div>
+		<div class="form__content">
+			<h1>Arena控制器</h1>
+			<div class="styled-input">
+				<input id="adds" type="text" class="styled-input__input" name="adds">
+				<div class="styled-input__placeholder">
+					<span class="styled-input__placeholder-text">IP地址</span>
+				</div>
+				<div class="styled-input__circle"></div>
+			</div>
+			<div class="styled-input">
+				 <input id="port" type="text" class="styled-input__input">
+				<div class="styled-input__placeholder">
+					<span class="styled-input__placeholder-text">端口</span>
+				</div>
+				<div class="styled-input__circle"></div>
+			</div>
+			<div class="styled-input">
+				<input id="code" type="text" class="styled-input__input">
+			   <div class="styled-input__placeholder">
+				   <span class="styled-input__placeholder-text">参数</span>
+			   </div>
+			   <div class="styled-input__circle"></div>
+		   </div>
+		   <div class="styled-input">
+			<input id="message" type="text" class="styled-input__input">
+		   <div class="styled-input__placeholder">
+			   <span class="styled-input__placeholder-text">地址</span>
+		   </div>
+		   <div class="styled-input__circle"></div>
+	   </div>
+			<button type="button" id="oscsend" class="styled-button">
+				<span class="styled-button__real-text-holder">
+					<span class="styled-button__real-text">发送</span>
+					<span class="styled-button__moving-block face">
+						<span class="styled-button__text-holder">
+							<span class="styled-button__text">发送</span>
+						</span>
+					</span><span class="styled-button__moving-block back">
+						<span class="styled-button__text-holder">
+							<span class="styled-button__text">发送</span>
+						</span>
+					</span>
+				</span>
+			</button>
+		</div>
+
+	</form>
+</main>
+
+<script  src="js/index.js"></script>
+<script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("#oscsend").click(function(){
+		$.post("http://47.52.139.97:8080/v0/api/oscsend",{
+			adds:$("#adds").val(),
+			port:$("#port").val(),
+			code:$("#code").val(),
+			message:$("#message").val(),
+		},
+		function(data,status){
+			alert("数据: \n" + data + "\n状态: " + status);
+		});
+	});
+});
+</script>
+</body>
+</html>
